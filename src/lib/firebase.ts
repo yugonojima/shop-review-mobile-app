@@ -1,6 +1,6 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
-import { Shop } from "./types/shop";
+import { Shop } from "../types/shop";
 import Constants from "expo-constants";
 
 if (!firebase.apps.length) {

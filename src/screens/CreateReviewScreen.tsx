@@ -2,9 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, SafeAreaView, View, Image, Alert } from "react-native";
 import { createReviewRef, uploadImage } from "../lib/firebase";
 import { UserContext } from "../Context/UserContext";
+import { ReviewsContext } from "../Context/ReviewsContext";
 import { pickImage } from "../lib/image-picker";
 import firebase from "firebase";
 import { getExtention } from "../utils/file";
+
 /* components */
 import { IconButton } from "../components/IconButton";
 import { TextArea } from "../components/TextArea";
@@ -32,6 +34,7 @@ export const CreateReviewScreen: React.FC<Props> = ({
   const [imageUri, setImageUri] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const { user } = useContext(UserContext);
+  const { reviews, setReviews } = useContext(ReviewsContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -59,9 +62,10 @@ export const CreateReviewScreen: React.FC<Props> = ({
     const downloadUrl = await uploadImage(imageUri, storagePath);
     //reviewドキュメントを作る
     const review = {
+      id: reviewDocRef.id,
       user: {
-        id: user !== null ? user.id : "",
-        name: user !== null ? user.name : "",
+        id: user !== undefined ? user.id : "",
+        name: user !== undefined ? user.name : "",
       },
       shop: {
         id: shop.id,
@@ -74,6 +78,8 @@ export const CreateReviewScreen: React.FC<Props> = ({
       createdAt: firebase.firestore.Timestamp.now(),
     } as Review;
     await reviewDocRef.set(review);
+    // レビュー一覧に即時反映させる
+    setReviews([review, ...reviews]);
     setText("");
     setScore(3);
     setImageUri("");

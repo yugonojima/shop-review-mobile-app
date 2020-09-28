@@ -24,7 +24,6 @@ export const getShops = async () => {
 
 export const signin = async () => {
   const userCredintial = await firebase.auth().signInAnonymously();
-  console.log(userCredintial.user);
   const uid = userCredintial.user.uid;
   const userDoc = await firebase.firestore().collection("users").doc(uid).get();
   if (!userDoc.exists) {

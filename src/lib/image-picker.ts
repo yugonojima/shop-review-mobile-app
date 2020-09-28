@@ -2,7 +2,7 @@ import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 
 const getCameraRollPermission = async () => {
-  if (Constants.platform.ios) {
+  if (Constants.platform !== undefined ? Constants.platform.ios : "") {
     const {status} = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== "granted") {
       alert("画像を選択するためにはカメラロールの許可が必要です");

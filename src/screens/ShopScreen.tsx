@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, SafeAreaView, FlatList } from "react-native";
 import { getReviews } from "../lib/firebase";
+import { ReviewsContext } from "../Context/ReviewsContext";
 /*component*/
 import { ShopDetail } from "../components/ShopDetail";
 import { FloatingActionButton } from "../components/FloatingActionButton";
@@ -19,7 +20,8 @@ type Props = {
 // どうしてpropsが、shopではないのか？
 export const ShopScreen: React.FC<Props> = ({ navigation, route }) => {
   const { shop } = route.params;
-  const [reviews, setReviews] = useState<Review[]>([]);
+  // const [reviews, setReviews] = useState<Review[]>([]);
+  const { reviews, setReviews } = useContext(ReviewsContext);
 
   useEffect(() => {
     navigation.setOptions({ title: shop.name });
@@ -35,7 +37,7 @@ export const ShopScreen: React.FC<Props> = ({ navigation, route }) => {
       <FlatList
         ListHeaderComponent={<ShopDetail shop={shop} />}
         data={reviews}
-        renderItem={( {item} ) => <ReviewItem review={item} />}
+        renderItem={({ item }) => <ReviewItem review={item} />}
         keyExtractor={(item) => item.id}
       />
       <FloatingActionButton

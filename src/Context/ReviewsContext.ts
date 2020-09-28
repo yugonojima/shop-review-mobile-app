@@ -2,11 +2,11 @@ import { createContext } from "react";
 import { Review } from "../types/review";
 
 export type ReviewsContextValue = {
-  reviews: Review | null;
-  setReviews: (reviews: Review | null) => void;
+  reviews: Review[];
+  setReviews: (reviews: Review[]) => void;
 };
 
-export const UserContext = createContext<ReviewsContextValue>({
-  reviews: null,
+export const ReviewsContext = createContext<ReviewsContextValue>({
+  reviews: [],
   setReviews: () => {},
 });

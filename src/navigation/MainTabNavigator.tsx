@@ -10,7 +10,7 @@ export const MainTabNavigator = () => {
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: "#900",
-        inactiveTintColor: '"999',
+        inactiveTintColor: "#999",
       }}
     >
       <Tab.Screen

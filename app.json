@@ -27,8 +27,13 @@
         "messagingSenderId": "586172302468",
         "appId": "1:586172302468:web:3dd7ab605e8ea3fd006ed1",
         "measurementId": "G-V14TB5GP0X"
+      },
+      "algolia": {
+        "appId": "JJ2U796QFU",
+        "searchApiKey": "73fb480e4c8a108f49e692671d3d3ec8"
       }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     }
